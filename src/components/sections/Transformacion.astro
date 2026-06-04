@@ -7,28 +7,26 @@ const panels = [
   {
     number: '01',
     accent: 'PRESENCIA',
-    title: 'Silenciar el\nruido exterior',
+    title: 'Silenciar el<br>ruido exterior',
     body: 'Para volverte a escuchar.',
   },
   {
     number: '02',
     accent: 'LUCIDEZ',
-    title: 'El ruido interno\nse asienta',
+    title: 'El ruido interno<br>se asienta',
     body: 'Lo que importa emerge con naturalidad y sin esfuerzo.',
   },
   {
     number: '03',
     accent: 'RECONEXIÓN',
-    title: 'Habitar tu cuerpo\ncompletamente',
+    title: 'Habitar tu cuerpo<br>completamente',
     body: 'Sentirlo como hogar.',
-    titleClass: 'trans-title--long'
   },
   {
     number: '04',
     accent: 'LIBERACIÓN',
-    title: 'Soltar aquello que\nya cumplió su ciclo',
+    title: 'Soltar aquello que<br>ya cumplió su ciclo',
     body: 'Un espacio de cierre y apertura simultánea.',
-    titleClass: 'trans-title--long'
   }
 ];
 ---
@@ -71,9 +69,7 @@ const panels = [
           </div>
           
           <!-- Title -->
-          <h2 class={`trans-title ${panel.titleClass || ''} mb-6 font-serif text-[#F5F0E8] whitespace-pre-line`}>
-            {panel.title}
-          </h2>
+          <h2 class="trans-title mb-6 font-serif text-[#F5F0E8] whitespace-pre-line" set:html={panel.title} />
           
           <!-- Gold Rule -->
           <div class="w-[60px] h-[1px] bg-[#C9A96E] opacity-50 mx-auto mb-6"></div>
@@ -159,11 +155,6 @@ const panels = [
     letter-spacing: -0.02em;
   }
 
-  .trans-title--long {
-    font-size: clamp(2.2rem, 5vw, 4.2rem);
-    letter-spacing: -0.015em;
-  }
-
   @media (max-width: 767px) {
     .panel-content {
       padding: 2rem 1.5rem;
@@ -171,9 +162,6 @@ const panels = [
     .trans-title {
       font-size: clamp(2.4rem, 9vw, 3.5rem);
       line-height: 1.08;
-    }
-    .trans-title--long {
-      font-size: clamp(2rem, 7.5vw, 2.8rem);
     }
   }
 </style>
