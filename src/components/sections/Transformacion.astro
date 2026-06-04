@@ -7,25 +7,25 @@ const panels = [
   {
     number: '01',
     accent: 'PRESENCIA',
-    title: 'Silenciar el<br>ruido exterior',
+    title: 'Silenciar el\nruido exterior',
     body: 'Para volverte a escuchar.',
   },
   {
     number: '02',
     accent: 'LUCIDEZ',
-    title: 'El ruido interno<br>se asienta',
+    title: 'El ruido interno\nse asienta',
     body: 'Lo que importa emerge con naturalidad y sin esfuerzo.',
   },
   {
     number: '03',
     accent: 'RECONEXIÓN',
-    title: 'Habitar tu cuerpo<br>completamente',
+    title: 'Habitar tu cuerpo\ncompletamente',
     body: 'Sentirlo como hogar.',
   },
   {
     number: '04',
     accent: 'LIBERACIÓN',
-    title: 'Soltar aquello que<br>ya cumplió su ciclo',
+    title: 'Soltar aquello que\nya cumplió su ciclo',
     body: 'Un espacio de cierre y apertura simultánea.',
   }
 ];
@@ -69,7 +69,9 @@ const panels = [
           </div>
           
           <!-- Title -->
-          <h2 class="trans-title mb-6 font-serif text-[#F5F0E8] whitespace-pre-line" set:html={panel.title} />
+          <h2 class="trans-title mb-6 font-serif text-[#F5F0E8]" style="white-space: pre-line">
+            {panel.title}
+          </h2>
           
           <!-- Gold Rule -->
           <div class="w-[60px] h-[1px] bg-[#C9A96E] opacity-50 mx-auto mb-6"></div>
