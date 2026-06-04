@@ -1,0 +1,335 @@
+---
+---
+<section id="reservar" class="reservar-section">
+  <div class="reservar-inner">
+    
+    <div class="reservar-label">RESERVAR LUGAR</div>
+    
+    <h2 class="reservar-title">
+      El primer paso<br/>
+      <em>es decir sí.</em>
+    </h2>
+    
+    <p class="reservar-sub">
+      Los lugares son intencionalmente pocos.<br/>
+      Completa el formulario y te contactaremos en menos de 24 horas.
+    </p>
+
+    <form 
+      id="namayma-form"
+      class="reserva-form"
+      action="https://formspree.io/f/REEMPLAZAR_CON_ID"
+      method="POST"
+    >
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@correo.com" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="+52 55 0000 0000" required />
+        </div>
+        <div class="form-group">
+          <label for="ciudad">Ciudad</label>
+          <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad de México" />
+        </div>
+      </div>
+
+      <div class="form-group form-group--full">
+        <label for="experiencia">¿Es tu primera experiencia de este tipo?</label>
+        <select id="experiencia" name="experiencia">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="primera-vez">Sí, es mi primera vez</option>
+          <option value="algo-experiencia">He hecho meditación o yoga antes</option>
+          <option value="experiencia-profunda">Tengo experiencia con ceremonias o retiros</option>
+        </select>
+      </div>
+
+      <div class="form-group form-group--full">
+        <label for="como-llegaste">¿Cómo llegaste a NAMAYMA?</label>
+        <select id="como-llegaste" name="como-llegaste">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="instagram">Instagram</option>
+          <option value="recomendacion">Recomendación de alguien</option>
+          <option value="busqueda">Búsqueda en internet</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group form-group--full">
+        <label for="mensaje">¿Hay algo que quieras compartir antes de tu lugar? <span class="label-optional">(opcional)</span></label>
+        <textarea id="mensaje" name="mensaje" rows="3" placeholder="Intención, pregunta, o lo que sientas..."></textarea>
+      </div>
+
+      <div class="form-footer">
+        <p class="form-fecha">4 Julio 2026 · Ciudad de México · Cupos limitados</p>
+        <button type="submit" class="btn-reservar">
+          <span class="btn-text">Solicitar Mi Lugar</span>
+          <span class="btn-icon">→</span>
+        </button>
+      </div>
+
+      <div id="form-success" class="form-success" style="display:none;">
+        <div class="success-icon">✦</div>
+        <p>Tu solicitud fue recibida.<br/>Te contactaremos en menos de 24 horas.</p>
+      </div>
+    </form>
+
+  </div>
+</section>
+
+<style>
+.reservar-section {
+  background: var(--color-bg, #0a0a0a);
+  padding: 8rem 2rem;
+  position: relative;
+}
+
+.reservar-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 80px;
+  background: linear-gradient(to bottom, transparent, #C9A96E44);
+}
+
+.reservar-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.reservar-label {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: #C9A96E;
+  margin-bottom: 1.5rem;
+}
+
+.reservar-title {
+  font-family: var(--font-serif, serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  color: #F5F0E8;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.reservar-title em {
+  color: #C9A96E;
+  font-style: italic;
+}
+
+.reservar-sub {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.95rem;
+  color: rgba(245,240,232,0.6);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.reserva-form {
+  text-align: left;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.form-group--full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: rgba(245,240,232,0.5);
+  text-transform: uppercase;
+}
+
+.label-optional {
+  color: rgba(245,240,232,0.3);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.7rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(245,240,232,0.04);
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.9rem;
+  color: #F5F0E8;
+  outline: none;
+  transition: border-color 0.3s, background 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A96E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: #1a1a1a;
+  color: #F5F0E8;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(245,240,232,0.25);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(201,169,110,0.6);
+  background: rgba(245,240,232,0.07);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-fecha {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,232,0.35);
+  margin: 0;
+}
+
+.btn-reservar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #C9A96E;
+  color: #0a0a0a;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  border-radius: 2px;
+}
+
+.btn-reservar:hover {
+  background: #d4b87a;
+  transform: translateY(-1px);
+}
+
+.btn-reservar:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  transition: transform 0.3s;
+}
+
+.btn-reservar:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+.form-success {
+  text-align: center;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.success-icon {
+  font-size: 1.5rem;
+  color: #C9A96E;
+  margin-bottom: 1rem;
+}
+
+.form-success p {
+  color: rgba(245,240,232,0.7);
+  font-family: var(--font-sans, sans-serif);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+</style>
+
+<script>
+  const form = document.getElementById('namayma-form') as HTMLFormElement;
+  const success = document.getElementById('form-success');
+
+  if (form && success) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.btn-reservar') as HTMLButtonElement;
+      const btnText = form.querySelector('.btn-text') as HTMLElement;
+      if (btn) btn.disabled = true;
+      if (btnText) btnText.textContent = 'Enviando...';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          if (btnText) btnText.textContent = 'Error — intenta de nuevo';
+          if (btn) btn.disabled = false;
+        }
+      } catch {
+        if (btnText) btnText.textContent = 'Error — intenta de nuevo';
+        if (btn) btn.disabled = false;
+      }
+    });
+  }
+</script>
