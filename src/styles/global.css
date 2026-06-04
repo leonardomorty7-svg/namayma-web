@@ -1,0 +1,382 @@
+/* =========================================================
+   NAMAYMA — Global CSS
+   Minimal, Stable, Crisp Editorial Aesthetic (0.xyz inspired)
+   ========================================================= */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Reset ─────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    /* Type scale */
+    --text-display: clamp(3.2rem, 6.5vw, 5.5rem);
+    --text-h1: clamp(2.2rem, 4.5vw, 3.8rem);
+    --text-h2: clamp(1.6rem, 2.8vw, 2.4rem);
+    --text-h3: clamp(1rem, 1.4vw, 1.2rem);
+    --text-label: 0.65rem;
+    --text-body-lg: 1rem;
+    --text-body-sm: 0.875rem;
+
+    /* Letter spacing */
+    --tracking-label: 0.25em;
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0.01em;
+
+    /* Line heights */
+    --leading-display: 1.05;
+    --leading-heading: 1.2;
+    --leading-body: 1.75;
+
+    /* Colors */
+    --color-bg:       #050403;
+    --color-deep:     #0A0806;
+    --color-earth:    #16130D;
+    --color-stone:    #221E16;
+    --color-gold:     #C9A96E;
+    --color-gold-lt:  #E8CAA2;
+    --color-gold-dk:  #947241;
+    --color-cream:    #F5F0E8;
+    --color-mist:     rgba(245, 240, 232, 0.55);
+    --color-whisper:  rgba(245, 240, 232, 0.35);
+    --color-fog:      #756C5C;
+    --color-line:     #211D16;
+
+    --ease-sacred:    cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-breath:    cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --transition-fast:   0.3s var(--ease-breath);
+    --transition-med:    0.6s var(--ease-sacred);
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-cream);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+  }
+
+  section {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    color: var(--color-cream);
+    line-height: 1.05;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  img, video {
+    display: block;
+    max-width: 100%;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  /* Skip-link — hidden by default, visible on keyboard focus */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    padding: 0.75rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-bg);
+    background: var(--color-gold);
+    transition: top 0.3s var(--ease-breath);
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+    outline: none;
+  }
+
+  /* Screen-reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Global focus-visible — gold ring for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  /* Remove focus ring on mouse click */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-stone); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-fog); }
+
+/* ─── Utility Layer ──────────────────────────────────── */
+@layer utilities {
+  .text-gold-gradient {
+    background: linear-gradient(145deg, var(--color-gold-lt) 0%, var(--color-gold) 45%, var(--color-gold-dk) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Minimal glass nav, safe rendering */
+  .glass-nav {
+    background: rgba(5, 4, 3, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(33, 29, 22, 0.5);
+  }
+
+  .section-padding {
+    padding-top: clamp(6rem, 12vw, 10rem);
+    padding-bottom: clamp(4rem, 8vw, 5rem);
+  }
+
+  .container-ritual {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(2rem, 5vw, 6rem);
+  }
+
+  /* Stable scroll indicator */
+  .scroll-indicator {
+    animation: scrollBounce 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100%  { transform: translateY(0); opacity: 0.3; }
+    50%       { transform: translateY(10px); opacity: 0.8; }
+  }
+
+  /* Highly visible smoke rise animation for validation */
+  @keyframes smokeRise1 {
+    0%   { transform: translateY(0) translateX(-2%); opacity: 0; }
+    20%  { opacity: 0.6; }
+    80%  { opacity: 0.6; }
+    100% { transform: translateY(-400px) translateX(6%); opacity: 0; }
+  }
+  @keyframes smokeRise2 {
+    0%   { transform: translateY(0) translateX(3%); opacity: 0; }
+    20%  { opacity: 0.5; }
+    80%  { opacity: 0.5; }
+    100% { transform: translateY(-500px) translateX(-4%); opacity: 0; }
+  }
+  @keyframes smokeRise3 {
+    0%   { transform: translateY(0) translateX(-1%); opacity: 0; }
+    20%  { opacity: 0.7; }
+    80%  { opacity: 0.7; }
+    100% { transform: translateY(-350px) translateX(3%); opacity: 0; }
+  }
+
+  .animate-smoke-1 { animation: smokeRise1 10s ease-in-out infinite; }
+  .animate-smoke-2 { animation: smokeRise2 14s ease-in-out infinite; animation-delay: -4s; }
+  .animate-smoke-3 { animation: smokeRise3 18s ease-in-out infinite; animation-delay: -9s; }
+
+
+  /* Sacred architectural grid — for Ocho Dimensiones */
+  .bg-architectural {
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        rgba(207, 166, 104, 0.03) 0px,
+        rgba(207, 166, 104, 0.03) 1px,
+        transparent 1px,
+        transparent 200px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(207, 166, 104, 0.02) 0px,
+        rgba(207, 166, 104, 0.02) 1px,
+        transparent 1px,
+        transparent 300px
+      );
+  }
+
+  /* Vertical gold line — used in Manifesto signature */
+  .gold-line-v {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+    opacity: 0.3;
+  }
+
+  /* Journal ruled lines — for Transformaciones/Benefits */
+  .bg-journal-lines {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 119px,
+        rgba(207, 166, 104, 0.04) 119px,
+        rgba(207, 166, 104, 0.04) 120px
+      );
+  }
+
+  /* Gold pillar of light — narrow vertical glow */
+  .gold-pillar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(207, 166, 104, 0.08) 20%,
+      rgba(207, 166, 104, 0.15) 50%,
+      rgba(207, 166, 104, 0.08) 80%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .gold-pillar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(207, 166, 104, 0.04) 0%,
+      transparent 70%
+    );
+  }
+}
+
+/* ─── Component Layer ────────────────────────────────── */
+@layer components {
+  /* Section labels — all small gold caps across the site */
+  .section-label {
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    color: var(--color-gold);
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 400;
+  }
+
+  /* All body paragraphs */
+  .section-body {
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-body);
+    color: var(--color-mist);
+  }
+
+  /* All card descriptions */
+  .card-body {
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-body);
+    color: var(--color-whisper);
+  }
+  .btn-ritual {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-mist);
+    border: 1px solid rgba(207, 166, 104, 0.2);
+    background: transparent;
+    transition: all var(--transition-med);
+    cursor: pointer;
+  }
+
+  .btn-ritual:hover {
+    border-color: rgba(207, 166, 104, 0.5);
+    color: var(--color-gold-lt);
+    background: rgba(207, 166, 104, 0.03);
+  }
+
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 3rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-bg);
+    background: linear-gradient(145deg, var(--color-gold-lt), var(--color-gold));
+    transition: all var(--transition-med);
+    cursor: pointer;
+  }
+
+  .btn-gold:hover {
+    background: linear-gradient(145deg, #FDF4E3, var(--color-gold-lt));
+    transform: translateY(-2px);
+  }
+
+  .label-sacred {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .divider-gold {
+    width: 2.5rem;
+    height: 1px;
+    background: var(--color-gold);
+    opacity: 0.4;
+  }
+}

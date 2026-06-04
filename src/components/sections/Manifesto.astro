@@ -1,0 +1,138 @@
+---
+/**
+ * NAMAYMA — Manifesto Section
+ * 0.xyz inspired: stable parallax, perfectly crisp readable typography
+ */
+---
+
+<section
+  id="manifesto"
+  class="relative w-full overflow-hidden bg-n-bg"
+  aria-labelledby="manifesto-heading"
+>
+  <!-- Warm gradient from Hero's forest tones into darkness — emotional continuity -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 inset-x-0 h-[40vh] bg-gradient-to-b from-n-earth/40 via-n-deep/20 to-transparent"></div>
+    <div class="absolute bottom-0 inset-x-0 h-[20vh] bg-gradient-to-t from-n-bg to-transparent"></div>
+  </div>
+
+  <!-- ── Content ─────────────────────────────────────── -->
+  <div class="relative z-10 section-padding container-ritual min-h-screen flex flex-col justify-center">
+
+    <div class="max-w-[55ch] md:max-w-none mx-auto w-full">
+      
+      <!-- Overline -->
+      <div class="manifesto-element flex items-center justify-center gap-5 mb-20 md:mb-28 opacity-0">
+        <div class="divider-gold !w-16"></div>
+        <span class="label-sacred text-n-gold tracking-[0.3em]">El Manifiesto</span>
+        <div class="divider-gold !w-16"></div>
+      </div>
+
+      <!-- Main editorial statement -->
+      <div class="text-center mb-24 md:mb-32">
+        <h2 id="manifesto-heading" class="font-serif text-display-lg text-n-cream leading-[1.0] tracking-tight">
+          <span class="manifiesto-title block" style="opacity: 0; transform: translateY(25px); transition: opacity 0.9s ease, transform 0.9s ease;">No es un retiro.</span>
+          <span class="manifiesto-title italic text-gold-gradient block" style="opacity: 0; transform: translateY(25px); transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;">Es un umbral.</span>
+        </h2>
+      </div>
+
+      <div class="manifiesto-divider" aria-hidden="true">
+        <span></span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="3" fill="#C9A96E" opacity="0.6"/>
+          <circle cx="12" cy="12" r="7" stroke="#C9A96E" stroke-width="0.5" opacity="0.3"/>
+        </svg>
+        <span></span>
+      </div>
+
+      <!-- Body copy -->
+      <div class="grid md:grid-cols-2 gap-16 md:gap-24 max-w-6xl mx-auto">
+        <p class="manifesto-fade section-body font-sans font-light opacity-0">
+          NAMAYMA nació del reconocimiento de que vivimos desconectados de nosotros mismos.
+          Del cuerpo, del silencio, de la tierra. Y de que esa desconexión tiene un costo
+          invisible que pagamos cada día en forma de estrés, ansiedad y vacío.
+        </p>
+        <p class="manifesto-fade section-body font-sans font-light opacity-0">
+          Esta experiencia es una invitación a regresar. A ti. A lo que siempre has sabido
+          pero olvidaste. A través del movimiento, el sonido, el silencio, la respiración
+          y el ritual compartido. Un espacio sostenido con absoluta impecabilidad.
+        </p>
+      </div>
+
+      <!-- Signature line -->
+      <div class="manifesto-fade flex flex-col items-center mt-32 opacity-0">
+        <div class="gold-line-v h-20"></div>
+        <p class="font-serif" style="font-style: italic; color: rgba(201, 169, 110, 0.6); font-size: var(--text-body-lg); text-align: center; letter-spacing: 0.05em; margin-top: 3rem;">
+          Con presencia. Con intención. Con amor.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+#manifesto {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,169,110,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 50% 85%, rgba(201,169,110,0.03) 0%, transparent 60%),
+    #0a0a0a;
+}
+.manifiesto-title.visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+.manifiesto-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 3rem auto 6rem auto;
+  max-width: 400px;
+}
+.manifiesto-divider span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent);
+}
+</style>
+
+<script>
+  import { loadGSAP, fadeReveal } from '../../lib/gsap';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Title entrance animations
+    (() => {
+      const targets = document.querySelectorAll('.manifiesto-title');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      targets.forEach(t => obs.observe(t));
+    })();
+
+    const gsap = await loadGSAP();
+    if (!gsap) return;
+
+    // Crisp typography reveals
+    fadeReveal('.manifesto-element', {
+      stagger: 0.2,
+      y: 40,
+      scrollTrigger: {
+        trigger: '#manifesto',
+        start: 'top 75%',
+      }
+    });
+
+    fadeReveal('.manifesto-fade', {
+      stagger: 0.2,
+      y: 20,
+      scrollTrigger: {
+        trigger: '.manifesto-fade',
+        start: 'top 85%',
+      }
+    });
+  });
+</script>

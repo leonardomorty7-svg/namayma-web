@@ -1,0 +1,180 @@
+---
+/**
+ * NAMAYMA — Transformación
+ * 4 panels using IntersectionObserver (CSS only animations, zero GSAP)
+ */
+const panels = [
+  {
+    number: '01',
+    accent: 'PRESENCIA',
+    title: 'Silenciar el\nruido exterior',
+    body: 'Para volverte a escuchar.',
+  },
+  {
+    number: '02',
+    accent: 'LUCIDEZ',
+    title: 'El ruido interno\nse asienta',
+    body: 'Lo que importa emerge con naturalidad y sin esfuerzo.',
+  },
+  {
+    number: '03',
+    accent: 'RECONEXIÓN',
+    title: 'Habitar tu cuerpo\ncompletamente',
+    body: 'Sentirlo como hogar.',
+  },
+  {
+    number: '04',
+    accent: 'LIBERACIÓN',
+    title: 'Soltar aquello que\nya cumplió su ciclo',
+    body: 'Un espacio de cierre y apertura simultánea.',
+  }
+];
+---
+
+<section id="transformacion" class="relative w-full bg-[#0a0a0a]" style="height: 400vh;">
+  <!-- Intersection Observer Triggers -->
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="z-index: 1;">
+    <div class="trans-trigger absolute w-full" style="top: 0; height: 100vh;" data-index="0"></div>
+    <div class="trans-trigger absolute w-full" style="top: 100vh; height: 100vh;" data-index="1"></div>
+    <div class="trans-trigger absolute w-full" style="top: 200vh; height: 100vh;" data-index="2"></div>
+    <div class="trans-trigger absolute w-full" style="top: 300vh; height: 100vh;" data-index="3"></div>
+  </div>
+
+  <!-- Inner Sticky Container -->
+  <div class="sticky top-0 h-screen w-full overflow-hidden" style="z-index: 10;">
+    
+    <!-- Panels -->
+    {panels.map((panel, i) => (
+      <div 
+        class={`trans-panel absolute inset-0 flex items-center justify-center bg-[#0a0a0a] ${i === 0 ? 'is-active' : ''}`} 
+        style={`z-index: ${(i + 1) * 10};`}
+        data-index={i}
+      >
+        <!-- Decorative Number Background -->
+        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] font-serif text-[22rem] text-[#C9A96E] opacity-[0.04] leading-none pointer-events-none z-0 select-none hidden md:block">
+          {panel.number}
+        </span>
+        
+        <div class="relative z-[1] w-full max-w-[700px] px-8 text-center">
+          
+          <!-- Section Label (Only on first panel) -->
+          {i === 0 && (
+            <div class="mb-16 text-[0.65rem] tracking-[0.3em] text-[#C9A96E] uppercase">
+              LA TRANSFORMACIÓN
+            </div>
+          )}
+          
+          <!-- Accent Word -->
+          <div class="mb-6 text-[0.65rem] tracking-[0.25em] text-[#C9A96E] uppercase">
+            {panel.accent}
+          </div>
+          
+          <!-- Title -->
+          <h2 class="mb-6 font-serif text-[clamp(2rem,5vw,4.5rem)] font-light leading-[1.15] text-[#F5F0E8] whitespace-pre-line">
+            {panel.title}
+          </h2>
+          
+          <!-- Gold Rule -->
+          <div class="w-[60px] h-[1px] bg-[#C9A96E] opacity-50 mx-auto mb-6"></div>
+          
+          <!-- Body -->
+          <p class="text-[#888] leading-[1.7] max-w-[480px] mx-auto" style="font-size: var(--text-body-lg);">
+            {panel.body}
+          </p>
+        </div>
+      </div>
+    ))}
+
+    <!-- Counter -->
+    <div class="absolute bottom-10 right-12 text-[0.65rem] tracking-[0.2em] text-[#C9A96E] z-50">
+      <span id="trans-counter">01</span> / 04
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* CSS-only animations */
+  .trans-panel {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    pointer-events: none;
+  }
+  
+  .trans-panel.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .trans-panel[data-index="0"] {
+    background-image:
+      linear-gradient(rgba(8,6,4,0.85) 0%, rgba(8,6,4,0.72) 50%, rgba(8,6,4,0.90) 100%),
+      url('/images/transformacion/presencia.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .trans-panel[data-index="1"] {
+    background-image:
+      linear-gradient(rgba(8,6,4,0.85) 0%, rgba(8,6,4,0.72) 50%, rgba(8,6,4,0.90) 100%),
+      url('/images/transformacion/lucidez.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .trans-panel[data-index="2"] {
+    background-image:
+      linear-gradient(rgba(8,6,4,0.85) 0%, rgba(8,6,4,0.72) 50%, rgba(8,6,4,0.90) 100%),
+      url('/images/transformacion/reconexion.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .trans-panel[data-index="3"] {
+    background-image:
+      linear-gradient(rgba(8,6,4,0.85) 0%, rgba(8,6,4,0.72) 50%, rgba(8,6,4,0.90) 100%),
+      url('/images/transformacion/liberacion.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .trans-panel::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 1px;
+    width: 0%;
+    background: linear-gradient(to right, transparent, #C9A96E, transparent);
+    transition: width 1.2s ease;
+    z-index: 2;
+  }
+  .trans-panel.is-active::after {
+    width: 100%;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const panels = document.querySelectorAll('.trans-panel');
+    const triggers = document.querySelectorAll('.trans-trigger');
+    const counter = document.getElementById('trans-counter');
+
+    if (!panels.length || !triggers.length) return;
+
+    // Activate first panel immediately
+    panels[0].classList.add('is-active');
+    if (counter) counter.textContent = '01';
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.dataset.index);
+          panels.forEach(p => p.classList.remove('is-active'));
+          panels[index].classList.add('is-active');
+          if (counter) counter.textContent = String(index + 1).padStart(2, '0');
+        }
+      });
+    }, { threshold: 0.6, rootMargin: '-10% 0px -10% 0px' });
+
+    triggers.forEach(t => observer.observe(t));
+  });
+</script>

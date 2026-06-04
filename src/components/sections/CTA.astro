@@ -1,0 +1,146 @@
+---
+/**
+ * NAMAYMA — CTA / Final Chapter
+ * Chapter 07: The Return
+ * Cinematic closing — forest returns, emotional symmetry with Hero,
+ * distinct emotional message that creates closure, not repetition.
+ */
+---
+
+<section
+  id="reservar"
+  class="cierre-section"
+  aria-labelledby="cta-heading"
+>
+  <div class="cierre-bg" aria-hidden="true"></div>
+
+  <!-- ── Content ──────────────────────────────────────────────────── -->
+  <div class="cierre-content container-ritual">
+
+    <!-- Overline -->
+    <div class="cta-el flex items-center justify-center gap-5 mb-14 opacity-0">
+      <div class="divider-gold !w-10"></div>
+      <span class="label-sacred text-n-gold-lt/50 tracking-[0.4em]">El Cierre</span>
+      <div class="divider-gold !w-10"></div>
+    </div>
+
+    <!-- Emotional Closing — distinct from Hero's "Regresa a ti" -->
+    <h2
+      id="cta-heading"
+      class="cta-el font-serif text-display-lg text-n-cream leading-[1.05] mb-6 opacity-0"
+    >
+      Lo que buscas<br />
+      <em class="not-italic text-gold-gradient">ya sabe tu nombre.</em>
+    </h2>
+
+    <!-- Supporting thought — intimate, not salesy -->
+    <p class="cta-el font-serif italic text-[clamp(1.1rem,2vw,1.5rem)] max-w-[35ch] mx-auto leading-[1.7] mb-16 opacity-0" style="color: rgba(245, 240, 232, 0.85); text-shadow: 0 1px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6);">
+      No es coincidencia que estés aquí.<br />
+      Algo dentro de ti reconoció el camino.
+    </p>
+
+    <!-- Spacer line -->
+    <div class="cta-el flex justify-center mb-14 opacity-0">
+      <div class="gold-line-v h-16"></div>
+    </div>
+
+    <!-- CTA — understated, premium -->
+    <div class="cta-el opacity-0">
+      <p class="font-sans text-n-mist/60 font-light mb-4 max-w-[40ch] mx-auto leading-[1.7]" style="font-size: var(--text-body-lg);">
+        La próxima experiencia NAMAYMA se acerca.<br />
+        Los lugares son intencionalmente pocos.
+      </p>
+      <p class="font-sans text-[0.7rem] uppercase mb-10" style="color: rgba(201, 169, 110, 0.9); text-shadow: 0 1px 15px rgba(0,0,0,0.8); letter-spacing: 0.2em;">
+        4 Julio 2026 · Cupos limitados
+      </p>
+      <a
+        href="mailto:hola@namayma.com?subject=Quiero%20reservar%20mi%20lugar%20en%20NAMAYMA"
+        class="btn-gold inline-flex"
+        id="cta-reserve-btn"
+        aria-label="Enviar solicitud de reserva para NAMAYMA"
+      >
+        Solicitar Mi Lugar
+      </a>
+    </div>
+
+    <!-- Fine print -->
+    <p class="cta-el font-sans mt-10 opacity-0" style="color: rgba(201, 169, 110, 0.7); text-shadow: 0 1px 12px rgba(0,0,0,0.9); font-size: var(--text-body-sm); letter-spacing: 0.1em;">
+      Recibirás respuesta en menos de 24 horas.
+    </p>
+
+  </div>
+</section>
+
+<style>
+.cierre-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cierre-bg {
+  position: absolute;
+  inset: -30%;
+  background-image:
+    radial-gradient(ellipse 70% 60% at 50% 55%, rgba(4,2,1,0.72) 0%, rgba(4,2,1,0.45) 50%, rgba(4,2,1,0.15) 100%),
+    linear-gradient(rgba(4,2,1,0.55) 0%, rgba(4,2,1,0.25) 30%, rgba(4,2,1,0.25) 70%, rgba(4,2,1,0.65) 100%),
+    url('/images/cierre-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  z-index: 0;
+}
+
+.cierre-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 8rem 2rem 6rem;
+}
+</style>
+
+<script>
+  import { loadGSAP, fadeReveal } from '../../lib/gsap';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Parallax logic
+    (() => {
+      const bg = document.querySelector('.cierre-bg') as HTMLElement;
+      if (!bg) return;
+      const section = bg.parentElement;
+      if (!section) return;
+      const onScroll = () => {
+        const rect = section.getBoundingClientRect();
+        const viewH = window.innerHeight;
+        if (rect.bottom < 0 || rect.top > viewH) return;
+        const progress = (viewH - rect.top) / (viewH + rect.height);
+        bg.style.transform = `translateY(${(progress - 0.5) * 160}px)`;
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    const gsap = await loadGSAP();
+    if (!gsap) return;
+
+    const ctx = gsap.context(() => {
+
+      // Content reveals — slow, staggered, ceremonial
+      fadeReveal('.cta-el', {
+        stagger: 0.2,
+        y: 30,
+        duration: 2,
+        scrollTrigger: {
+          trigger: '#reservar',
+          start: 'top 60%',
+        }
+      });
+
+    }, document.getElementById('reservar')!);
+
+    document.addEventListener('astro:before-swap', () => ctx.revert(), { once: true });
+  });
+</script>

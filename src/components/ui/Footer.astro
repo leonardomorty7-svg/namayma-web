@@ -1,0 +1,152 @@
+---
+/**
+ * NAMAYMA — Footer
+ * Premium, atmospheric closure
+ */
+---
+
+<footer class="namayma-footer" role="contentinfo">
+  <!-- Gold top border -->
+  <div class="footer-border"></div>
+
+  <div class="footer-inner">
+    <!-- Left: Brand -->
+    <div class="footer-brand">
+      <!-- Keep existing logo/img tag exactly as-is, just resize -->
+      <div class="footer-logo">
+        <a href="/" class="transition-opacity duration-400 hover:opacity-80">
+          <img src="/images/namayma-logo-white.svg" alt="NAMAYMA" />
+        </a>
+      </div>
+      <p class="footer-tagline">Una experiencia de inmersión consciente</p>
+    </div>
+
+    <!-- Center: Navigation -->
+    <nav class="footer-nav">
+      <a href="#experiencias">Experiencias</a>
+      <a href="#rituales">Rituales</a>
+      <a href="#faq">Preguntas</a>
+      <a href="mailto:hola@namayma.com">Contacto</a>
+    </nav>
+
+    <!-- Right: Social -->
+    <div class="footer-social">
+      <a href="https://instagram.com/namayma" target="_blank" rel="noopener noreferrer" class="footer-instagram">
+        <span>Instagram</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom: Copyright -->
+  <div class="footer-bottom">
+    <p>© 2026 NAMAYMA. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<style>
+.namayma-footer {
+  background: #080808;
+  padding: 0;
+  position: relative;
+}
+
+.footer-border {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+  padding: 4rem 5vw 3rem;
+  gap: 2rem;
+}
+
+.footer-brand .footer-logo img {
+  height: 48px;
+  width: auto;
+  opacity: 0.9;
+}
+
+.footer-tagline {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.5);
+  margin-top: 1rem;
+  font-family: sans-serif;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.footer-nav a {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.45);
+  text-decoration: none;
+  font-family: sans-serif;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: rgba(201,169,110,0.8);
+}
+
+.footer-social {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.footer-instagram {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.6);
+  text-decoration: none;
+  font-family: sans-serif;
+  transition: color 0.3s ease;
+}
+
+.footer-instagram:hover {
+  color: rgba(201,169,110,1);
+}
+
+.footer-bottom {
+  padding: 1.5rem 5vw;
+  border-top: 1px solid rgba(245,240,232,0.06);
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: rgba(245,240,232,0.2);
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+  }
+  .footer-nav { align-items: center; }
+  .footer-social { justify-content: center; }
+}
+</style>

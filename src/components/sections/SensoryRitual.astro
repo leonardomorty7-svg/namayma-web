@@ -1,0 +1,116 @@
+---
+/**
+ * NAMAYMA — Las Frecuencias (Sensory Ritual)
+ * Final Stabilization: Static premium editorial presentation.
+ */
+---
+
+<section
+  id="rituales"
+  class="relative w-full min-h-screen flex items-center bg-n-black pb-24 md:pb-32 pt-0"
+  aria-labelledby="ritual-heading"
+>
+  <!-- ── Background System ──────────────────────────── -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 w-full h-full">
+      <img
+        src="/images/ritual-bg.jpg"
+        alt="Cuenco tibetano rodeado de velas y hierbas sagradas"
+        class="w-full h-full object-cover object-center"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Required Visibility Overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
+  </div>
+
+  <!-- ── Content Layer (Static 2-Column) ─────────────────────── -->
+  <div class="container-ritual relative z-10 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      
+      <!-- Left: Headline Block -->
+      <div class="max-w-xl">
+        <div class="flex items-center gap-5 mb-10">
+          <div class="w-12 h-px bg-n-gold/40 shrink-0"></div>
+          <span class="label-sacred text-[rgba(255,255,255,0.80)] tracking-[0.4em] [text-shadow:0_2px_12px_rgba(0,0,0,0.35)]">LAS FRECUENCIAS</span>
+        </div>
+        <h2 id="ritual-heading" class="frecuencias-title">
+          Frecuencias que abren<br>
+          <em>lo que la mente no puede alcanzar.</em>
+        </h2>
+      </div>
+
+      <!-- Right: Experience List -->
+      <div class="max-w-xl lg:ml-auto w-full">
+        <ul class="space-y-12 list-none" role="list">
+          {[
+            'Baños de sonido con cristal y metal',
+            'Percusión chamánica en vivo',
+            'Respiración holotrópica guiada',
+            'Integración en silencio sagrado',
+          ].map((item) => (
+            <li class="frecuencia-item flex items-start gap-8">
+              <div class="w-10 h-px bg-n-gold/30 mt-[0.85rem] shrink-0" aria-hidden="true"></div>
+              <span class="font-serif text-[clamp(1.4rem,2.2vw,1.8rem)] text-[rgba(255,255,255,0.95)] font-light leading-[1.4] [text-shadow:0_2px_12px_rgba(0,0,0,0.35)]">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.frecuencias-title {
+  font-family: serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.2;
+  color: #F5F0E8;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.frecuencias-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.frecuencias-title em {
+  font-style: italic;
+  color: #C9A96E;
+}
+.frecuencia-item {
+  opacity: 0;
+  transform: translateX(15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.frecuencia-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+</style>
+
+<script>
+  (() => {
+    const title = document.querySelector('.frecuencias-title');
+    const items = document.querySelectorAll('.frecuencia-item');
+    items.forEach((item, i) => {
+      (item as HTMLElement).style.transitionDelay = `${0.3 + i * 0.15}s`;
+    });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    if (title) obs.observe(title);
+    items.forEach(i => obs.observe(i));
+  })();
+</script>

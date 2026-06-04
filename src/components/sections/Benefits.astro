@@ -1,0 +1,199 @@
+---
+/**
+ * NAMAYMA — Benefits / Transformaciones Section
+ * Chapter 05: The Transformation
+ * Cinematic storytelling sequence — each transformation is its own full-screen moment.
+ * ScrollTrigger-driven editorial pacing with typographic hierarchy.
+ */
+
+const transformations = [
+  {
+    number: '01',
+    title: 'Habitar el\nmomento presente.',
+    body: 'Pausar el ruido exterior para volver a escucharte.',
+    accent: 'PRESENCIA.',
+  },
+  {
+    number: '02',
+    title: 'Claridad mental\ny emocional.',
+    body: 'El ruido interno se asienta. Lo importante emerge.',
+    accent: 'CLARIDAD.',
+  },
+  {
+    number: '03',
+    title: 'Reconexión\ncon el cuerpo.',
+    body: 'Habitar tu cuerpo completamente. Sentirlo como hogar.',
+    accent: 'RECONEXIÓN.',
+  },
+  {
+    number: '04',
+    title: 'Liberación de\npatrones limitantes.',
+    body: 'Soltar aquello que ya cumplió su ciclo.',
+    accent: 'LIBERACIÓN.',
+  }
+];
+---
+
+<section
+  id="beneficios"
+  class="relative w-full bg-n-bg overflow-hidden"
+  aria-labelledby="benefits-heading"
+>
+  <!-- Background atmosphere -->
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <div class="bg-journal-lines absolute inset-0 opacity-60"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[60vh] bg-[radial-gradient(ellipse_at_top,_rgba(207,166,104,0.04)_0%,_transparent_60%)]"></div>
+  </div>
+
+  <!-- Accessible section heading (visually hidden, ARIA target) -->
+  <h2 id="benefits-heading" class="sr-only">La Transformación — Seis dimensiones de cambio profundo</h2>
+
+  <!-- ── Pinned Storytelling Container ──────────────────────────── -->
+  <div id="ben-pin-container" class="h-screen w-full relative z-10 flex items-center justify-center">
+
+    <!-- Progress indicator — thin vertical gold line -->
+    <div class="absolute left-8 md:left-12 top-1/2 -translate-y-1/2 h-[40vh] w-px bg-n-line/30 hidden md:block">
+      <div id="ben-progress" class="w-full bg-n-gold/50 origin-top" style="height: 0%;"></div>
+    </div>
+
+    <!-- Fixed chapter label -->
+    <div id="ben-chapter-label" class="absolute top-16 md:top-20 left-1/2 -translate-x-1/2 flex items-center gap-4 opacity-0">
+      <div class="divider-gold !w-8"></div>
+      <span class="label-sacred text-n-gold/60 tracking-[0.3em]">La Transformación</span>
+      <div class="divider-gold !w-8"></div>
+    </div>
+
+    <!-- Counter -->
+    <div id="ben-counter" class="absolute bottom-16 md:bottom-20 right-8 md:right-12 opacity-0">
+      <span id="ben-current-num" class="font-serif text-[1.2rem] text-n-gold/40">01</span>
+      <span class="font-sans text-[0.65rem] text-n-fog/30 mx-2">/</span>
+      <span class="font-sans text-[0.65rem] text-n-fog/30">04</span>
+    </div>
+
+    <!-- ── Transformation Moments ──────────────────────────────── -->
+    <div class="relative w-full h-full max-w-6xl mx-auto px-8 md:px-16">
+      {transformations.map((t, i) => (
+        <div
+          class="ben-moment absolute inset-0 flex items-center justify-center opacity-0 invisible"
+          data-index={i}
+          data-num={t.number}
+        >
+          <div class="w-full flex flex-col md:flex-row items-center md:items-end gap-12 md:gap-20">
+
+            <!-- Left: Number & Accent Word -->
+            <div class="flex flex-col items-center md:items-start shrink-0 md:w-48">
+              <span class="font-serif italic text-[clamp(3rem,5vw,5rem)] text-n-gold/20 leading-none mb-4">{t.number}</span>
+              <span class="font-sans text-[0.65rem] tracking-[0.3em] uppercase text-n-gold/50">{t.accent}</span>
+            </div>
+
+            <!-- Center: Title — massive editorial typography -->
+            <div class="flex-1 text-center md:text-left">
+              <h3 class="font-serif text-[clamp(2.5rem,5.5vw,5.5rem)] text-n-cream leading-[0.95] tracking-tight whitespace-pre-line mb-8">
+                {t.title}
+              </h3>
+              <div class="ben-moment-line w-0 h-px bg-n-gold/25 mb-8"></div>
+              <p class="font-sans text-body-xl text-n-mist/70 font-light leading-[1.8] max-w-[36ch]">
+                {t.body}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { loadGSAP } from '../../lib/gsap';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const gsap = await loadGSAP();
+    if (!gsap) return;
+
+    const ctx = gsap.context(() => {
+
+      const moments = gsap.utils.toArray('.ben-moment') as HTMLElement[];
+      const total = moments.length;
+      const counterEl = document.getElementById('ben-current-num');
+      const startTimes: number[] = [];
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#beneficios',
+          start: 'top top',
+          end: `+=${total * 250}%`, // Slow luxury editorial pacing
+          scrub: 1.2, 
+          pin: true,
+          onUpdate: (self: any) => {
+            // Update progress bar
+            const progressBar = document.getElementById('ben-progress');
+            if (progressBar) {
+              progressBar.style.height = `${self.progress * 100}%`;
+            }
+          }
+        },
+        onUpdate: function() {
+          // Sync counter exactly with the timeline's active stage
+          const time = this.time();
+          let activeIndex = 0;
+          startTimes.forEach((t, idx) => {
+            if (time >= t) activeIndex = idx;
+          });
+          if (counterEl) {
+            counterEl.textContent = String(activeIndex + 1).padStart(2, '0');
+          }
+        }
+      });
+
+      // Show UI elements
+      tl.to('#ben-chapter-label', { autoAlpha: 1, duration: 0.3 });
+      tl.to('#ben-counter', { autoAlpha: 1, duration: 0.3 }, '<');
+
+      // Add a small initial pause before Stage 1 starts
+      tl.to({}, { duration: 0.5 });
+
+      // Animate each transformation moment sequentially
+      moments.forEach((moment, i) => {
+        const line = moment.querySelector('.ben-moment-line');
+        
+        // Record the exact time this stage starts fading in
+        startTimes.push(tl.duration());
+
+        // 1. Enter
+        tl.fromTo(moment,
+          { autoAlpha: 0, y: 60, scale: 0.98 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' }
+        );
+
+        // Gold line expands (overlaps slightly with entrance)
+        if (line) {
+          tl.to(line, { width: '120px', duration: 1.0, ease: 'power2.out' }, '-=0.6');
+        }
+
+        // 2. Hold (fully readable for most of the scroll distance)
+        tl.to({}, { duration: 3.5 });
+
+        // 3. Exit (ALL stages must fade out completely)
+        tl.to(moment, {
+          autoAlpha: 0,
+          y: -40,
+          scale: 1.02,
+          duration: 1.0,
+          ease: 'power2.in',
+        });
+
+        // 4. Strict gap before the next stage can begin
+        tl.to({}, { duration: 0.5 });
+      });
+
+      // Fade UI at end
+      tl.to('#ben-chapter-label', { autoAlpha: 0, duration: 0.3 });
+      tl.to('#ben-counter', { autoAlpha: 0, duration: 0.3 }, '<');
+
+    }, document.getElementById('beneficios')!);
+
+    document.addEventListener('astro:before-swap', () => ctx.revert(), { once: true });
+  });
+</script>

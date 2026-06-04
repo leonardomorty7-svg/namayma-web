@@ -1,0 +1,121 @@
+---
+/**
+ * NAMAYMA — Navigation
+ * Stable, ultra-minimal header with crisp load animations
+ */
+---
+
+<header id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-1000 ease-sacred">
+  <div class="container-ritual">
+    <nav
+      class="flex items-center justify-between py-6 md:py-8"
+      aria-label="Navegación principal"
+    >
+      <!-- Wordmark -->
+      <a href="/" class="nav-item opacity-0 transition-opacity duration-1000" aria-label="NAMAYMA — Inicio">
+        <img src="/images/namayma-logo.svg" alt="NAMAYMA" class="h-[30px] md:h-10 w-auto" />
+      </a>
+
+      <!-- Desktop Links -->
+      <ul class="hidden md:flex items-center gap-12 list-none opacity-0 nav-item" role="list">
+        <li><a href="#experiencias" class="label-sacred text-n-mist hover:text-n-cream transition-colors duration-600">Experiencias</a></li>
+        <li><a href="#rituales" class="label-sacred text-n-mist hover:text-n-cream transition-colors duration-600">Rituales</a></li>
+        <li><a href="#beneficios" class="label-sacred text-n-mist hover:text-n-cream transition-colors duration-600">Beneficios</a></li>
+      </ul>
+
+      <!-- CTA -->
+      <div class="hidden md:flex items-center gap-6 opacity-0 nav-item">
+        <a href="#reservar" class="btn-ritual !py-3 !px-8 text-[0.7rem]" aria-label="Reservar tu lugar">
+          <span>Reservar</span>
+          <span class="w-1 h-1 rounded-full bg-n-gold/60 inline-block"></span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden flex flex-col justify-center items-end gap-[6px] w-8 h-8 focus:outline-none group opacity-0 nav-item" aria-label="Abrir menú" aria-expanded="false">
+        <span class="block h-px w-6 bg-n-cream/80 transition-all duration-600 group-hover:w-7 group-hover:bg-n-cream"></span>
+        <span class="block h-px w-4 bg-n-gold/70 transition-all duration-600 group-hover:w-6 group-hover:bg-n-gold"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-n-bg/98 backdrop-blur-md flex flex-col justify-center px-10 opacity-0 pointer-events-none transition-opacity duration-1000" aria-hidden="true">
+  <nav class="flex flex-col gap-10 relative z-10">
+    <a href="#experiencias" class="mobile-nav-link font-serif text-5xl text-n-cream/90 hover:text-n-gold-lt transition-colors duration-600">Experiencias</a>
+    <a href="#rituales" class="mobile-nav-link font-serif text-5xl text-n-cream/90 hover:text-n-gold-lt transition-colors duration-600">Rituales</a>
+    <a href="#beneficios" class="mobile-nav-link font-serif text-5xl text-n-cream/90 hover:text-n-gold-lt transition-colors duration-600">Beneficios</a>
+    <a href="#reservar" class="mobile-nav-link font-serif text-5xl text-n-gold">Reservar</a>
+  </nav>
+
+  <div class="mt-20 pt-10 border-t border-n-line relative z-10">
+    <p class="label-sacred text-n-fog">Regresa a ti.</p>
+  </div>
+</div>
+
+<script>
+  import { loadGSAP, fadeReveal } from '../../lib/gsap';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const gsap = await loadGSAP();
+    if (!gsap) return;
+
+    // Clean, crisp entrance (no blurs!)
+    fadeReveal('.nav-item', { delay: 0.1, duration: 1.2, y: -10, stagger: 0.1 });
+
+    // Nav scroll behavior
+    const nav = document.getElementById('nav');
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const scrolled = !entry.isIntersecting;
+        nav?.classList.toggle('glass-nav', scrolled);
+        
+        const navInner = nav?.querySelector('nav');
+        if (scrolled) {
+          navInner?.classList.replace('py-6', 'py-4');
+          navInner?.classList.replace('md:py-8', 'md:py-5');
+        } else {
+          navInner?.classList.replace('py-4', 'py-6');
+          navInner?.classList.replace('md:py-5', 'md:py-8');
+        }
+      },
+      { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
+    );
+
+    const sentinel = document.createElement('div');
+    sentinel.style.cssText = 'position:absolute;top:100px;left:0;height:1px;width:1px;pointer-events:none;';
+    document.body.prepend(sentinel);
+    observer.observe(sentinel);
+
+    // Mobile menu toggle
+    const toggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+
+    toggle?.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      toggle.setAttribute('aria-expanded', String(menuOpen));
+      mobileMenu?.setAttribute('aria-hidden', String(!menuOpen));
+
+      if (menuOpen) {
+        mobileMenu?.classList.replace('opacity-0', 'opacity-100');
+        mobileMenu?.classList.remove('pointer-events-none');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu?.classList.replace('opacity-100', 'opacity-0');
+        mobileMenu?.classList.add('pointer-events-none');
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        mobileMenu?.classList.replace('opacity-100', 'opacity-0');
+        mobileMenu?.classList.add('pointer-events-none');
+        document.body.style.overflow = '';
+      });
+    });
+  });
+</script>

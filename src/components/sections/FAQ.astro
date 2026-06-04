@@ -1,0 +1,174 @@
+---
+/**
+ * NAMAYMA — FAQ Section
+ * Chapter 06: Clarity
+ * Maximum readability. Elegant black. Premium accordion.
+ * No imagery. No decoration. Pure contemplative information.
+ */
+
+const faqs = [
+  {
+    q: '¿Necesito experiencia previa en meditación o yoga?',
+    a: 'No. La experiencia está diseñada para cualquier persona, sin importar su nivel. Lo único necesario es disposición y apertura.',
+  },
+  {
+    q: '¿Qué tan seguro es el microdosing dentro de la experiencia?',
+    a: 'El microdosing se realiza con protocolos cuidadosamente diseñados, dosis mínimas y acompañamiento profesional en todo momento. Es opcional.',
+  },
+  {
+    q: '¿Cuántas personas hay por experiencia?',
+    a: 'Los grupos son intencionalmente pequeños — máximo 15 personas — para garantizar un espacio íntimo, seguro y personalizado.',
+  },
+  {
+    q: '¿Dónde se realiza NAMAYMA?',
+    a: 'La ubicación exacta se comparte después de confirmar tu lugar. Es un espacio seleccionado con criterios de seguridad, belleza y energía.',
+  },
+  {
+    q: '¿Qué incluye la experiencia?',
+    a: 'Meditación, grounding, danza consciente, sanación sonora, breathwork, ritual ancestral, microdosing opcional y conexión interior.',
+  },
+  {
+    q: '¿Qué necesito llevar?',
+    a: 'Ropa cómoda, una esterilla si tienes, hidratación y disposición total para la experiencia. Nosotros ponemos el resto.',
+  },
+];
+---
+
+<section
+  id="faq"
+  class="relative pt-16 pb-24 md:pt-16 md:pb-32 overflow-hidden"
+  aria-labelledby="faq-heading"
+>
+  <div class="container-ritual relative z-10">
+
+    <!-- Header -->
+    <div class="faq-header mb-16 text-center">
+      <div class="mb-6 text-[0.65rem] tracking-[0.3em] text-[#C9A96E] uppercase">
+        PREGUNTAS
+      </div>
+      <h2 id="faq-heading" class="faq-title font-serif text-[clamp(2.5rem,5vw,4.5rem)] text-[#F5F0E8] font-light leading-tight">
+        Todo lo que necesitas saber.
+      </h2>
+    </div>
+
+    <!-- Accordion -->
+    <div class="faq-list max-w-[680px] mx-auto opacity-0" id="faq-accordion">
+      {faqs.map((faq, i) => (
+        <div class="faq-item group border-t last:border-b" style="border-color: rgba(201, 169, 110, 0.2);" data-index={i}>
+          <button
+            class="w-full flex items-center justify-between gap-8 py-6 text-left transition-all duration-500"
+            aria-expanded="false"
+            id={`faq-btn-${i}`}
+            aria-controls={`faq-answer-${i}`}
+          >
+            <span class="font-serif text-[#F5F0E8] group-hover:text-[#C9A96E] transition-colors duration-400 leading-snug" style="font-size: var(--text-body-lg);">
+              {faq.q}
+            </span>
+            <span
+              class="faq-icon shrink-0 text-[#C9A96E] text-[1.2rem] transition-transform duration-300 ease-out font-light"
+              aria-hidden="true"
+            >
+              +
+            </span>
+          </button>
+          <div
+            id={`faq-answer-${i}`}
+            role="region"
+            aria-labelledby={`faq-btn-${i}`}
+            class="faq-answer-wrapper overflow-hidden max-h-0 transition-all duration-400 ease-out"
+          >
+            <p class="faq-answer">
+              {faq.a}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+#faq {
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(201,169,110,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,169,110,0.03) 0%, transparent 50%),
+    #0a0a0a;
+}
+.faq-answer {
+  font-size: var(--text-body-sm);
+  color: rgba(245, 240, 232, 0.6);
+  line-height: 1.8;
+  padding: 0.75rem 0 1.25rem;
+  border-top: 1px solid rgba(201, 169, 110, 0.1);
+  margin-top: 0.5rem;
+}
+</style>
+
+<script>
+  import { loadGSAP, fadeReveal } from '../../lib/gsap';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Title entrance
+    (() => {
+      const title = document.querySelector('.faq-title');
+      if (!title) return;
+      (title as HTMLElement).style.opacity = '0';
+      (title as HTMLElement).style.transform = 'translateY(20px)';
+      (title as HTMLElement).style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+      const obs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          (title as HTMLElement).style.opacity = '1';
+          (title as HTMLElement).style.transform = 'translateY(0)';
+          obs.unobserve(title);
+        }
+      }, { threshold: 0.3 });
+      obs.observe(title);
+    })();
+
+    const gsap = await loadGSAP();
+    if (!gsap) return;
+
+    const ctx = gsap.context(() => {
+      fadeReveal('.faq-list', {
+        scrollTrigger: { trigger: '.faq-list', start: 'top 80%' }
+      });
+
+      // Accordion behavior
+      const items = document.querySelectorAll('.faq-item');
+      items.forEach((item) => {
+        const btn = item.querySelector('button') as HTMLButtonElement;
+        const answer = item.querySelector('.faq-answer-wrapper') as HTMLElement;
+        const icon = item.querySelector('.faq-icon') as HTMLElement;
+
+        btn?.addEventListener('click', () => {
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+          // Close all
+          items.forEach((other) => {
+            const ob = other.querySelector('button') as HTMLButtonElement;
+            const oa = other.querySelector('.faq-answer-wrapper') as HTMLElement;
+            const oi = other.querySelector('.faq-icon') as HTMLElement;
+            if (ob !== btn) {
+              ob?.setAttribute('aria-expanded', 'false');
+              if (oa) oa.style.maxHeight = '0';
+              if (oi) oi.style.transform = 'rotate(0deg)';
+            }
+          });
+
+          // Toggle this
+          btn.setAttribute('aria-expanded', String(!isOpen));
+          if (!isOpen) {
+            answer.style.maxHeight = '500px';
+            if (icon) icon.style.transform = 'rotate(45deg)';
+          } else {
+            answer.style.maxHeight = '0';
+            if (icon) icon.style.transform = 'rotate(0deg)';
+          }
+        });
+      });
+    }, document.getElementById('faq'));
+
+    document.addEventListener('astro:before-swap', () => ctx.revert(), { once: true });
+  });
+</script>

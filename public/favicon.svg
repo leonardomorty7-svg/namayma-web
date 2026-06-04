@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- NAMAYMA — minimal N glyph in gold on warm black -->
+  <rect width="32" height="32" fill="#0D0B09"/>
+  <text
+    x="50%"
+    y="50%"
+    dominant-baseline="central"
+    text-anchor="middle"
+    font-family="Georgia, serif"
+    font-size="20"
+    font-weight="400"
+    letter-spacing="1"
+    fill="#C9A96E"
+  >N</text>
+</svg>

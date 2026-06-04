@@ -1,0 +1,209 @@
+---
+/**
+ * NAMAYMA — Experiences Section
+ * Chapter 03: Ocho Dimensiones
+ * Sacred architectural atmosphere — deep black, gold accents, contemplative structure
+ */
+
+const experiences = [
+  {
+    number: '01',
+    name: 'Meditación',
+    description: 'Entrar en el silencio. Encontrar el centro que siempre ha existido dentro de ti.',
+    icon: '◯',
+  },
+  {
+    number: '02',
+    name: 'Grounding',
+    description: 'Reconectar con la tierra. Sentir el peso del cuerpo como un ancla sagrada.',
+    icon: '⊕',
+  },
+  {
+    number: '03',
+    name: 'Danza Consciente',
+    description: 'El cuerpo como lenguaje. Moverse desde adentro hacia afuera, sin pasos, solo presencia.',
+    icon: '∿',
+  },
+  {
+    number: '04',
+    name: 'Sanación Sonora',
+    description: 'Cuencos tibetanos, tambores, voz. El sonido como medicina que reorganiza el sistema nervioso.',
+    icon: '〜',
+  },
+  {
+    number: '05',
+    name: 'Ritual Ancestral',
+    description: 'Prácticas sostenidas por generaciones. El conocimiento que vive en los huesos de la humanidad.',
+    icon: '△',
+  },
+  {
+    number: '06',
+    name: 'Breathwork',
+    description: 'La respiración como llave. Acceder a estados expandidos sin salir de tu propio cuerpo.',
+    icon: '∞',
+  },
+  {
+    number: '07',
+    name: 'Microdosing',
+    description: 'Apoyo sutil para la apertura. Con intención, protocolo y acompañamiento profesional.',
+    icon: '✦',
+  },
+  {
+    number: '08',
+    name: 'Conexión Interior',
+    description: 'El encuentro más importante: contigo mismo. En profundidad, en honestidad, en amor.',
+    icon: '❋',
+  },
+];
+---
+
+<section
+  id="experiencias"
+  class="relative section-padding overflow-hidden"
+  aria-labelledby="experiences-heading"
+>
+  <!-- Sacred Architectural Background -->
+  <div class="absolute inset-0 bg-architectural pointer-events-none"></div>
+
+  <!-- Gold Pillar of Light — temple column center glow -->
+  <div class="gold-pillar opacity-0" id="exp-pillar"></div>
+
+  <div class="container-ritual relative z-10">
+
+    <!-- Header -->
+    <div class="exp-header flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 opacity-0">
+      <div>
+        <div class="flex items-center gap-4 mb-6">
+          <div class="divider-gold"></div>
+          <span class="label-sacred text-n-gold/70">La Experiencia</span>
+        </div>
+        <h2
+          id="experiences-heading"
+          class="font-serif text-display-md text-n-cream leading-tight"
+        >
+          Ocho dimensiones<br />
+          <em class="not-italic text-n-mist/70">de regreso a ti.</em>
+        </h2>
+      </div>
+      <div class="font-sans font-light" style="text-align: right; max-width: 340px; margin-left: auto; line-height: 1.7; color: rgba(245, 240, 232, 0.5); font-size: var(--text-body-sm);">
+        <p>Cada elemento está elegido con precisión.</p>
+        <p>Juntos crean una experiencia que no se olvida.</p>
+      </div>
+    </div>
+
+    <!-- Grid: Solid Architectural Panels -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="exp-grid">
+      {experiences.map((exp, i) => (
+        <article
+          class="dimension-card group relative bg-n-deep flex flex-col gap-5 rounded-sm"
+          data-index={i}
+          aria-label={exp.name}
+        >
+          <!-- Subtle gold glow on hover -->
+          <div class="absolute inset-0 bg-gradient-to-b from-n-gold/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-sm"></div>
+
+          <!-- Number + Icon -->
+          <div class="relative z-10 flex items-start justify-between">
+            <span class="label-sacred text-n-fog/40 card-number">{exp.number}</span>
+            <span
+              class="text-2xl text-n-gold/20 card-icon"
+              aria-hidden="true"
+            >
+              {exp.icon}
+            </span>
+          </div>
+
+          <!-- Gold line that grows on hover -->
+          <div class="relative z-10 w-0 h-px bg-n-gold transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-8"></div>
+
+          <!-- Name -->
+          <h3 class="relative z-10 font-serif text-2xl md:text-[1.6rem] text-n-cream group-hover:text-n-gold-lt transition-colors duration-500 leading-tight">
+            {exp.name}
+          </h3>
+
+          <!-- Description — improved contrast -->
+          <p class="relative z-10 card-body font-sans font-light flex-1">
+            {exp.description}
+          </p>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+#experiencias {
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 100%, rgba(201,169,110,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(201,169,110,0.03) 0%, transparent 50%),
+    #080808;
+}
+.dimension-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  cursor: default;
+}
+.dimension-card:hover {
+  border-color: rgba(201, 169, 110, 0.35);
+  box-shadow: 0 0 30px rgba(201, 169, 110, 0.08), inset 0 0 20px rgba(201, 169, 110, 0.03);
+  transform: translateY(-3px);
+}
+.dimension-card:hover .card-number {
+  color: rgba(201, 169, 110, 0.5);
+  transition: color 0.4s ease;
+}
+.dimension-card:hover .card-icon {
+  opacity: 0.6;
+  transform: scale(1.15);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+</style>
+
+<script>
+  import { loadGSAP, fadeReveal } from '../../lib/gsap';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    (() => {
+      const cards = document.querySelectorAll('.dimension-card');
+      cards.forEach((card, i) => {
+        const c = card as HTMLElement;
+        c.style.opacity = '0';
+        c.style.transform = 'translateY(20px)';
+        c.style.transition = `opacity 0.6s ease ${i * 0.08}s, transform 0.6s ease ${i * 0.08}s`;
+      });
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const t = e.target as HTMLElement;
+            t.style.opacity = '1';
+            t.style.transform = 'translateY(0)';
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      cards.forEach(c => obs.observe(c));
+    })();
+
+    const gsap = await loadGSAP();
+    if (!gsap) return;
+
+    const ctx = gsap.context(() => {
+      fadeReveal('.exp-header', {
+        scrollTrigger: { trigger: '.exp-header', start: 'top 85%' }
+      });
+
+      // Subtle pillar breathing animation
+      gsap.to('#exp-pillar', {
+        opacity: 0.6,
+        duration: 5,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      });
+    }, document.getElementById('experiencias'));
+
+    document.addEventListener('astro:before-swap', () => ctx.revert(), { once: true });
+  });
+</script>
