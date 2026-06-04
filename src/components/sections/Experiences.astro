@@ -159,6 +159,26 @@ const experiences = [
   transform: scale(1.15);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
+
+@media (max-width: 767px) {
+  #exp-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 2rem;
+    scrollbar-width: none;
+  }
+  #exp-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .dimension-card {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 80vw;
+    max-width: 300px;
+  }
+}
 </style>
 
 <script>

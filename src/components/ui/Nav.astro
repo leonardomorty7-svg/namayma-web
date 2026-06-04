@@ -32,7 +32,7 @@
       </div>
 
       <!-- Mobile Hamburger -->
-      <button id="menu-toggle" class="md:hidden flex flex-col justify-center items-end gap-[6px] w-8 h-8 focus:outline-none group opacity-0 nav-item" aria-label="Abrir menú" aria-expanded="false">
+      <button id="menu-toggle" class="md:hidden flex flex-col justify-center items-end gap-[6px] min-w-[44px] min-h-[44px] focus:outline-none group opacity-0 nav-item" aria-label="Abrir menú" aria-expanded="false">
         <span class="block h-px w-6 bg-n-cream/80 transition-all duration-600 group-hover:w-7 group-hover:bg-n-cream"></span>
         <span class="block h-px w-4 bg-n-gold/70 transition-all duration-600 group-hover:w-6 group-hover:bg-n-gold"></span>
       </button>
@@ -112,6 +112,8 @@
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
       link.addEventListener('click', () => {
         menuOpen = false;
+        toggle?.setAttribute('aria-expanded', 'false');
+        mobileMenu?.setAttribute('aria-hidden', 'true');
         mobileMenu?.classList.replace('opacity-100', 'opacity-0');
         mobileMenu?.classList.add('pointer-events-none');
         document.body.style.overflow = '';

@@ -31,17 +31,17 @@ const panels = [
 ];
 ---
 
-<section id="transformacion" class="relative w-full bg-[#0a0a0a]" style="height: 400vh;">
+<section id="transformacion" class="relative w-full bg-[#0a0a0a]" style="height: 400svh;">
   <!-- Intersection Observer Triggers -->
   <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="z-index: 1;">
-    <div class="trans-trigger absolute w-full" style="top: 0; height: 100vh;" data-index="0"></div>
-    <div class="trans-trigger absolute w-full" style="top: 100vh; height: 100vh;" data-index="1"></div>
-    <div class="trans-trigger absolute w-full" style="top: 200vh; height: 100vh;" data-index="2"></div>
-    <div class="trans-trigger absolute w-full" style="top: 300vh; height: 100vh;" data-index="3"></div>
+    <div class="trans-trigger absolute w-full" style="top: 0; height: 100svh;" data-index="0"></div>
+    <div class="trans-trigger absolute w-full" style="top: 100svh; height: 100svh;" data-index="1"></div>
+    <div class="trans-trigger absolute w-full" style="top: 200svh; height: 100svh;" data-index="2"></div>
+    <div class="trans-trigger absolute w-full" style="top: 300svh; height: 100svh;" data-index="3"></div>
   </div>
 
   <!-- Inner Sticky Container -->
-  <div class="sticky top-0 h-screen w-full overflow-hidden" style="z-index: 10;">
+  <div class="sticky top-0 h-[100svh] w-full overflow-hidden" style="z-index: 10;">
     
     <!-- Panels -->
     {panels.map((panel, i) => (
@@ -55,7 +55,7 @@ const panels = [
           {panel.number}
         </span>
         
-        <div class="relative z-[1] w-full max-w-[700px] px-8 text-center">
+        <div class="panel-content relative z-[1] w-full max-w-[700px] px-8 text-center">
           
           {i === 0 && (
             <div class="section-eyebrow mb-16 text-[0.65rem] tracking-[0.3em] text-[#C9A96E] uppercase">
@@ -148,6 +148,12 @@ const panels = [
   }
   .trans-panel.is-active::after {
     width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .panel-content {
+      padding: 2rem 1.5rem;
+    }
   }
 </style>
 
