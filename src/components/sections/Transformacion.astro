@@ -69,7 +69,7 @@ const panels = [
           </div>
           
           <!-- Title -->
-          <h2 class="mb-6 font-serif text-[clamp(2rem,5vw,4.5rem)] font-light leading-[1.15] text-[#F5F0E8] whitespace-pre-line">
+          <h2 class="trans-title mb-6 font-serif text-[#F5F0E8] whitespace-pre-line">
             {panel.title}
           </h2>
           
@@ -150,9 +150,20 @@ const panels = [
     width: 100%;
   }
 
+  .trans-title {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
   @media (max-width: 767px) {
     .panel-content {
       padding: 2rem 1.5rem;
+    }
+    .trans-title {
+      font-size: clamp(2.4rem, 9vw, 3.5rem);
+      line-height: 1.08;
     }
   }
 </style>
