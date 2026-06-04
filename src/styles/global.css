@@ -79,6 +79,12 @@
     margin-bottom: 0;
   }
 
+  section h2 {
+    font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
@@ -165,6 +171,16 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    color: #C9A96E;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1.5rem;
   }
 
   /* Minimal glass nav, safe rendering */
