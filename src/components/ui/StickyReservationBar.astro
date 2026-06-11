@@ -1,0 +1,51 @@
+---
+/**
+ * NAMAYMA — Sticky Reservation Bar
+ * Conversion-focused sticky bottom bar inspired by the main site.
+ */
+---
+<div id="sticky-reservation-bar" class="fixed bottom-0 left-0 w-full z-[45] bg-[#050505]/85 backdrop-blur-md border-t border-[#C9A96E]/20 transform translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+  <div class="w-full max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+    <!-- Left Text -->
+    <div class="font-serif text-[#F5F0E8] text-lg tracking-wide hidden sm:block">
+      VOLVER A TI
+    </div>
+    <div class="font-serif text-[#F5F0E8] text-base tracking-wide sm:hidden">
+      VOLVER A TI
+    </div>
+
+    <!-- Right Button -->
+    <button 
+      id="sticky-reserva-btn"
+      class="bg-[#C9A96E] hover:bg-[#F5F0E8] text-[#0a0a0a] px-5 py-3 md:px-8 md:py-3.5 rounded-sm font-sans text-[0.65rem] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300"
+    >
+      RESERVA TU CUPO
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const bar = document.getElementById('sticky-reservation-bar');
+    const btn = document.getElementById('sticky-reserva-btn');
+    
+    if(!bar || !btn) return;
+
+    // Smooth scroll to the reservation section
+    btn.addEventListener('click', () => {
+      const section = document.getElementById('reservar');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // Reveal the bar when scrolling past the hero (or roughly 1 viewport height)
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight * 0.8) {
+        bar.classList.remove('translate-y-full');
+      } else {
+        bar.classList.add('translate-y-full');
+      }
+    }, { passive: true });
+  });
+</script>
