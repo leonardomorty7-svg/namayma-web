@@ -1,0 +1,92 @@
+---
+/**
+ * NAMAYMA — Event Info Section
+ * Temporary section to display event details.
+ * TODO: The client will provide the final event information (Location, Time, Food, Price).
+ * Replace the placeholder texts here once provided.
+ */
+const infoItems = [
+  {
+    icon: '📍',
+    title: 'Lugar',
+    desc: 'Pendiente de confirmación por la organización',
+  },
+  {
+    icon: '🕒',
+    title: 'Horario',
+    desc: 'Pendiente de confirmación por la organización',
+  },
+  {
+    icon: '🍃',
+    title: 'Alimentación',
+    desc: 'Información pendiente de confirmación',
+  },
+  {
+    icon: '✨',
+    title: 'Inversión',
+    desc: 'Pendiente de confirmación por la organización',
+  }
+];
+---
+
+<section id="informacion" class="relative py-24 md:py-32 overflow-hidden bg-[#080808]">
+  <div class="container-ritual relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-16 opacity-0" id="info-header">
+      <div class="section-eyebrow mb-6 text-[#C9A96E] uppercase">
+        INFORMACIÓN DEL ENCUENTRO
+      </div>
+      <h2 class="font-serif text-[clamp(2.5rem,5vw,4rem)] text-[#F5F0E8] font-light leading-tight max-w-[600px] mx-auto">
+        Detalles de la experiencia
+      </h2>
+    </div>
+
+    <!-- Info Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-[800px] mx-auto">
+      {infoItems.map((item, i) => (
+        <div class="info-card opacity-0 bg-[#0a0a0a] border border-[#C9A96E]/20 p-10 text-center rounded-sm transition-all duration-500 hover:border-[#C9A96E]/40 hover:-translate-y-1">
+          <div class="text-3xl mb-4 opacity-80">{item.icon}</div>
+          <h3 class="font-serif text-2xl text-[#F5F0E8] mb-3 tracking-wide">{item.title}</h3>
+          <!-- TODO: Update placeholder text once final values are provided -->
+          <p class="font-sans text-[0.9rem] text-[#888] font-light leading-[1.6]">
+            {item.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadGSAP, fadeReveal } from '../../lib/gsap';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const gsap = await loadGSAP();
+    if (!gsap) return;
+
+    const ctx = gsap.context(() => {
+      // Reveal header
+      fadeReveal('#info-header', {
+        scrollTrigger: { trigger: '#informacion', start: 'top 85%' }
+      });
+
+      // Reveal cards stagger
+      gsap.fromTo('.info-card', 
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.out',
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: '.info-card',
+            start: 'top 85%',
+          }
+        }
+      );
+    }, document.getElementById('informacion'));
+
+    document.addEventListener('astro:before-swap', () => ctx.revert(), { once: true });
+  });
+</script>
