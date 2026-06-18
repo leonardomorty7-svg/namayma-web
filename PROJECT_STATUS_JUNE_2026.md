@@ -1,77 +1,67 @@
 # NAMAYMA WEB
-Project Status: Client Review Version
-
-Current Production URL:
-https://namayma-web.vercel.app
-
-Date:
-11 June 2026
+Project Status: Client Review Round
+Date: 11 June 2026
 
 --------------------------------------------------
-CURRENT STATUS
+CURRENT STATE
 --------------------------------------------------
 
-PROJECT READY FOR CLIENT REVIEW
-
-Implemented:
-
-- Landing page complete
-- Ritual sequence corrected
-- Rapé added as requested
-- Crystal bowls removed
-- Holotropic breathing removed
-- Event information section created
-- Semantic icons implemented
-- WhatsApp floating button added
-- Sticky bottom reservation bar added
-- Sticky CTA scrolls to reservation form
-- Demo reservation flow implemented
-- Reservation button redirects directly to:
-  https://www.namayma.com/confirmar-aporte/
+- Local build status: PASS (0 errors)
+- Production deployment status: LIVE
+- Current Vercel URL: https://namayma-web.vercel.app
+- Latest commit hash: c9fae8b (feat: client review updates, real event information and image refresh)
+- Current branch: main
 
 --------------------------------------------------
-IMPORTANT TEMPORARY CONFIGURATION
+IMPLEMENTED CHANGES
 --------------------------------------------------
 
-Current reservation flow is DEMO MODE.
-
-Form validation temporarily disabled.
-
-Reason:
-Client review and approval phase.
-
-Current behavior:
-
-RESERVAR MI LUGAR
-→ redirects directly to:
-https://www.namayma.com/confirmar-aporte/
-
-When client approves:
-
-1. Re-enable validation
-2. Re-enable Formspree integration
-3. Configure production form endpoint
-4. Remove demo redirect behavior
+- Hero image replaced (hero-bg.jpg optimized and mapped)
+- Closing section image replaced (cierre-bg.png applied)
+- Experience text updates requested by client:
+  - "Danza libre y presencia"
+  - "Regula el sistema nervioso central"
+  - "Conciencia de la humanidad"
+- Event details section updated with real data:
+  - Anolaima, Cundinamarca
+  - Finca Los Robles
+  - 9:00 a.m. – 5:00 p.m.
+  - Almuerzo vegetariano incluido
+  - $200.000 por persona
+  - $370.000 por pareja
+- Sticky CTA behavior fixed (scrolls exactly to the #namayma-form container)
+- Reservation flow status: DEMO MODE
+- Demo/production redirect status: Button instantly redirects to https://www.namayma.com/confirmar-aporte/ (Formspree disabled for demo).
 
 --------------------------------------------------
-FILES MOST RECENTLY MODIFIED
+FILES MODIFIED
 --------------------------------------------------
 
-- `src/components/sections/SensoryRitual.astro` (Ritual array updated)
-- `src/components/sections/EventInfo.astro` (New section added, icons updated)
-- `src/pages/index.astro` (Injected EventInfo, WhatsApp, Sticky CTA)
-- `src/components/ui/FloatingWhatsApp.astro` (New component created)
-- `src/components/ui/StickyReservationBar.astro` (New component created, updated target ID)
-- `src/components/ui/ReservaForm.astro` (Form submission temporarily mocked, validation removed)
+- `src/components/sections/Experiences.astro`: Updated text for Danza Consciente, Sanación Sonora, and Sabiduría Ancestral.
+- `src/components/sections/EventInfo.astro`: Applied real event data (Location, Time, Food, Price) and added `whitespace-pre-line` to handle multiline rendering without breaking design.
+- `src/components/ui/ReservaForm.astro`: Temporarily converted to Demo Mode (no validation, direct redirect).
+- `src/components/ui/StickyReservationBar.astro`: Corrected scroll target to point directly to `#namayma-form`.
+- `public/images/hero-bg.jpg`: New Hero image asset.
+- `public/images/cierre_bg.png`: New Closing section asset.
 
 --------------------------------------------------
-KNOWN PENDING ITEMS
+KNOWN CLIENT FEEDBACK APPLIED
 --------------------------------------------------
 
-Client still needs to provide:
+- Replace placeholder Event Details with the confirmed venue, schedule, food, and investment data.
+- Refine narrative copy in "Ocho dimensiones" to be more precise ("Danza libre y presencia", "Regula el sistema nervioso central").
+- Fix sticky CTA UX so it doesn't leave the user floating above the form.
+- Bypass form validation during the review phase so the client can experience the redirect to the payment/confirmation page immediately.
 
-- Final location
-- Final schedule
-- Final food information
-- Final pricing
-- Final reservation workflow approval
+--------------------------------------------------
+PENDING ITEMS
+--------------------------------------------------
+
+No pending technical issues.
+Awaiting next client review round.
+
+--------------------------------------------------
+RECOMMENDED NEXT STEP
+--------------------------------------------------
+
+Wait for client approval or additional corrections before further development.

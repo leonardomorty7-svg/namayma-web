@@ -1,41 +1,39 @@
-# RE-ENTRY BRIEFING: NAMAYMA WEB
+# NAMAYMA WEB - RE-ENTRY PROMPT
+
+**Project Path**: `/Users/andres/Documents/Namayma-Web`
+**Current Status**: Awaiting Client Review Round 2
+**Current Deployment URL**: https://namayma-web.vercel.app
 
 ## Project Architecture
 - **Framework**: Astro v4.16.19
-- **Styling**: Tailwind CSS, custom design tokens in `src/styles/global.css`
-- **Animations**: GSAP (via `src/lib/gsap.js`) and IntersectionObserver (CSS-only toggles for high-performance sections like Transformacion).
-- **Deployment**: Automatic Vercel deployment triggered by pushes to the `main` branch.
+- **Styling**: Tailwind CSS + Custom Tokens (`src/styles/global.css`)
+- **Structure**: Modular sections (`src/components/sections/`) composed in `src/pages/index.astro`.
+- **Interactions**: GSAP and minimal vanilla JS for sticky behaviors.
 
-## Main Sections
-The landing page (`src/pages/index.astro`) is composed of sequential storytelling modules:
-1. **Hero**: Cinematic parallax.
-2. **Manifesto**: Philosophical core.
-3. **Experiences**: 8 dimensions of the event (cards).
-4. **SensoryRitual**: List of frequencies/rituals (e.g. Rapé).
-5. **Transformacion**: 4 sticky panels tracking user scroll.
-6. **FAQ**: Accordion implementation.
-7. **EventInfo**: Minimalist grid with placeholders for event specifics.
-8. **CTA & ReservaForm**: Conversion zone.
+## Current Deployment State
+The `main` branch is fully deployed to Vercel and is completely stable. It contains the exact client-approved visual state, typography, and images.
 
-## Current Status (June 11, 2026)
-The project is structurally, visually, and functionally complete for **CLIENT REVIEW**. All visual feedback has been successfully implemented including semantic SVGs, new sections, and floating UI elements for conversion (WhatsApp + Sticky Bottom Bar).
+## Latest Client Feedback Applied
+- Injected actual event specifics (Anolaima, $200.000, etc.) into `EventInfo.astro`.
+- Refined micro-copy in `Experiences.astro`.
+- Perfected the sticky CTA scroll target to point to `#namayma-form`.
+- Set up a **DEMO MODE** reservation flow (`ReservaForm.astro`) where clicking "RESERVAR MI LUGAR" instantly redirects to the external checkout page without Formspree submission or HTML5 validation.
 
-## Recent Changes
-- Removed "Baños de sonido..." and "Respiración holotrópica..." and added "Rapé" to the top of `SensoryRitual.astro`.
-- Created `EventInfo.astro` section with placeholders for Lugar, Horario, Alimentación, and Inversión.
-- Integrated minimalist SVG icons across the UI matching the Namayma design language.
-- Built and injected `FloatingWhatsApp.astro` and `StickyReservationBar.astro`.
-- Fixed the sticky bar CTA scroll target to point precisely to `#namayma-form`.
-- **CRITICAL DEMO CHANGE**: Temporarily disabled HTML5 validation and Formspree submission in `ReservaForm.astro`. The "RESERVAR MI LUGAR" button acts as a direct link, instantly redirecting to `https://www.namayma.com/confirmar-aporte/`.
+## Files Modified in Last Cycle
+- `src/components/sections/Experiences.astro`
+- `src/components/sections/EventInfo.astro`
+- `src/components/ui/ReservaForm.astro`
+- `src/components/ui/StickyReservationBar.astro`
+- `PROJECT_STATUS_JUNE_2026.md`
+- `RESUME_PROMPT.md`
 
-## Pending Client Approvals & Information
-- The final event details to replace the placeholders in `EventInfo.astro` (Lugar, Horario, Alimentación, Inversión).
-- Approval of the overall landing page layout and copy.
-- Confirmation on how the final reservation form should actually process data (Formspree).
+## Remaining Pending Decisions
+- Final client approval of the entire visual flow and layout.
+- The Formspree backend configuration (the actual client endpoint ID).
 
 ## Exact Next Recommended Actions
-When the client returns with feedback/approval:
-1. **Restore Formspree**: Re-enable `required` tags, the `<form>` POST action/method, and inject the actual `REEMPLAZAR_CON_ID` in `src/components/ui/ReservaForm.astro`.
-2. **Populate Details**: Replace the placeholder strings in `src/components/sections/EventInfo.astro` with real data.
-3. **Apply Visual Feedback**: Make any design tweaks requested.
-4. **Run Validation**: `npm run build` and test all paths, particularly the form's success/redirect behavior, before finalizing handoff.
+When you are invoked to resume work:
+1. Do **NOT** touch the design, layout, or animations unless explicitly instructed.
+2. If the client approves the flow: Reverse the "Demo Mode" in `ReservaForm.astro`. You must restore `<form method="POST" action="...">`, re-add the `required` attributes to inputs, and configure the actual Formspree endpoint so real data capture begins.
+3. Apply any minor copy tweaks the client requests in this review round.
+4. Run `npm run build` and push to `main`.
